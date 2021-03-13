@@ -1,16 +1,20 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
   "name": "hello-express",
   "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
-  "main": "server.js",
+  "description": "Pepe Code Bos Altyapi v12",
+  "main": "Revenge.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node Revenge.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "discord.js": "^12.5.0",
+    "ms": "^2.1.2",
+    "fs": "^0.0.2",
+    "moment": "^2.29.1",
+    "quick.db": "^7.1.2",
+    "moment-duration-format": "^2.3.2",
+    "dblapi.js": "^2.4.1"
   },
   "engines": {
     "node": "12.x"
