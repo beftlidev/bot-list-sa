@@ -16,8 +16,10 @@ const PepeCode = new Discord.MessageEmbed()
 .setFooter(client.user.username,client.user.avatarURL())
 .setTimestamp()
 message.channel.send(new Discord.MessageEmbed().setColor('BLUE').setTitle('Kontrol Ediliyor..')).then(Mesaj => {
+setTimeout(() => {
 Mesaj.edit(PepeCode)
 },2500)
+})
 }
 
 exports.conf = {

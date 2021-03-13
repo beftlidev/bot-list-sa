@@ -167,15 +167,10 @@ client.on('messageDelete',async message => {
 	     	Message.delete({timeout:15000})
             client.guilds.cache.get(message.guild.id).channels.cache.get(message.channel.id).awaitMessages(Message => Message.member.roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol), {max: 1,time: 15000,errors: ['time']
             }).then(async Collected => {
-            let Cevap;
-            const Cevap1 = Collected.first().content
-            if (!Cevap1) Cevap = 'Belirtilmedi'
-            if (Cevap1) Cevap = Cevap1
             client.channels.cache.get(message.channel.id).bulkDelete(2)
-            client.channels.cache.get(ayarlar.BOTLog).send(`**<@${Bilgi.Gönderen}> Adlı Kullanıcının \`${Client.tag}\` Adlı Sistemde Onay Bekleyen Botu \`${Collected.first().author.tag}\` Tarafından \`${Cevap}\` Sebebiyle Reddedildi.**`)
+            client.channels.cache.get(ayarlar.BOTLog).send(`**<@${Bilgi.Gönderen}> Adlı Kullanıcının \`${Client.tag}\` Adlı Sistemde Onay Bekleyen Botu \`${Collected.first().author.tag}\` Tarafından \`${Collected.first().content || 'Belirtilmedi'}\` Sebebiyle Reddedildi.**`)
             })
             })
-        
     })
     })
 // RevengeNYKS \\
