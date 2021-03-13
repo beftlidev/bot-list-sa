@@ -10,7 +10,6 @@ if (!message.member.roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol)) retur
 const Üye = message.mentions.members.first()
 if (!Üye) return message.channel.send(Embed.setDescription('Lütfen üye etiketleyin.')).then(Hata => Hata.delete({timeout:15000}))
 const Client = await db.fetch(`BOT_${Üye.id}`)
-//if (Client.length > 2) return message.react('806579000565694484').then(() => message.react('2️⃣'))
 if (!Client) return message.channel.send('Sanırım Bu Kullanıcının Botu Yok').then(Hata => Hata.delete({timeout:15000}))
 client.users.fetch(Client).then((User) => {
 Üye.roles.add(ayarlar.SertifikalıKullanıcıRol)
