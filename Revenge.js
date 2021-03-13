@@ -77,7 +77,7 @@ client.on('message',async message => {
   if (!message.content.startsWith(ayarlar.prefix)) return
   let command = message.content.split(' ')[0].slice(ayarlar.prefix.length)
   let params = message.content.split(' ').slice(1)
-  let perms = client.elevation(message)
+  let perms = client.elevation(message) 
   let cmd
   if (client.commands.has(command)) {
     cmd = client.commands.get(command)
@@ -154,8 +154,7 @@ client.on('messageDelete',async message => {
     const Bilgi = db.fetch(`Bilgi_${message.id}`)
     if (!Bilgi) return;
     const fetchedLogs = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(Audit => Audit.entries.first())
-    if (fetchedLogs.executor.id == client.user.id) return console.log(false)
-  console.log(true)
+    if (fetchedLogs.executor.id == client.user.id || !client.guilds.cache.get(message.guild.id).members.cache.get(fetchedLogs.executor.id).roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol)) return
     const Clientt = Bilgi.Client
     client.users.fetch(Clientt).then((Client) => {
         const Ceon = new Discord.MessageEmbed()
@@ -166,14 +165,14 @@ client.on('messageDelete',async message => {
         .setDescription(`❓ **| Reddetme sebebi yazınız.**`)
         client.channels.cache.get(message.channel.id).send(Ceon).then(Message => {
 	     	Message.delete({timeout:15000})
-            client.guilds.cache.get(message.guild.id).channels.cache.get(message.channel.id).awaitMessages(Message => Message.member.roles.cache.find(Rol => Rol.id === '820336033778106369'), {max: 1,time: 15000,errors: ['time']
+            client.guilds.cache.get(message.guild.id).channels.cache.get(message.channel.id).awaitMessages(Message => Message.member.roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol), {max: 1,time: 15000,errors: ['time']
             }).then(async Collected => {
             let Cevap;
             const Cevap1 = Collected.first().content
             if (!Cevap1) Cevap = 'Belirtilmedi'
             if (Cevap1) Cevap = Cevap1
             client.channels.cache.get(message.channel.id).bulkDelete(2)
-            client.channels.cache.get(ayarlar.BOTLog).send(`**<@${Bilgi.Gönderen}> Adlı Kullanıcının \`${Client.tag}\` Adlı Sistemde Onay Bekleyen Botu \`${message.author.tag}\` Tarafından \`${Cevap}\` Sebebiyle Reddedildi.**`)
+            client.channels.cache.get(ayarlar.BOTLog).send(`**<@${Bilgi.Gönderen}> Adlı Kullanıcının \`${Client.tag}\` Adlı Sistemde Onay Bekleyen Botu \`${Collected.first().author.tag}\` Tarafından \`${Cevap}\` Sebebiyle Reddedildi.**`)
             })
             })
         
