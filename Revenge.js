@@ -72,7 +72,7 @@ client.unload = command => {
 }})}
 // RevengeNYKS \\
 client.on('message',async message => {
-    let client = message.client
+  let client = message.client
   if (message.author.bot) return
   if (!message.content.startsWith(ayarlar.prefix)) return
   let command = message.content.split(' ')[0].slice(ayarlar.prefix.length)
@@ -110,9 +110,9 @@ const Embed = new Discord.MessageEmbed()
 client.users.cache.get(BOTEkleyen).send(`<@${BOTEkleyen}>`,Embed)
 client.channels.cache.get(ayarlar.BOTLog).send(`**<@${BOTEkleyen}> Adlı Kullanıcının \`${client.users.cache.get(member.id).tag}\` Adlı Sistemde Onay Bekleyen Botu \`${client.users.cache.get(Log.executor.id).tag} [${db.fetch(`Count_${Log.executor.id}`) || 1}]\` Tarafından Kabul Edildi.**`)
 db.add(`Count_${Log.executor.id}`,1)
-member.roles.add('761883877010047006') // BOT Rol ID
+member.roles.add('820331331753607269') // BOT Rol ID
 } else {
-member.roles.add('761883878373589012') // Üye Rol ID
+member.roles.add('820331082406560775') // Üye Rol ID
 }
 })
 // [ ----------------------------------------------] \\
