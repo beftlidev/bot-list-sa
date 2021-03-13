@@ -34,7 +34,7 @@ DBL Onay: **[${DBL}](https://top.gg/bot/${ClientID})**
 .setTimestamp()
 .setFooter(User.tag,User.avatarURL())
 client.channels.cache.get(ayarlar.BOTLog).send(`**${message.author} Adlı Kullanıcı \`${User.tag}\` Adlı Botunu Sisteme Onaylanması İçin Başvurdu.**`)
-client.channels.cache.get(ayarlar.BOTModLog).send('<@&'+BOTModeratör+'>',Revenge).then(Mesaj => {
+client.channels.cache.get(ayarlar.BOTModKanal).send('<@&'+BOTModeratör+'>',Revenge).then(Mesaj => {
 db.set(`Mesaj_${ClientID}`,Mesaj.id)
 db.set(`Bilgi_${Mesaj.id}`,{Client: ClientID , Gönderen: message.author.id})
 })
