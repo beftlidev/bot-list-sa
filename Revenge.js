@@ -71,6 +71,28 @@ client.unload = command => {
  Reject(Hata)
 }})}
 // RevengeNYKS \\
+client.on('message',async message => {
+    let client = message.client
+  if (message.author.bot) return
+  if (!message.content.startsWith(ayarlar.prefix)) return
+  let command = message.content.split(' ')[0].slice(ayarlar.prefix.length)
+  let params = message.content.split(' ').slice(1)
+  let perms = client.elevation(message)
+  let cmd
+  if (client.commands.has(command)) {
+    cmd = client.commands.get(command)
+  } else if (client.aliases.has(command)) {
+    cmd = client.commands.get(client.aliases.get(command))
+  }
+  if (cmd) {
+    if (perms < cmd.conf.permLevel) return
+    cmd.run(client, message, params, perms)
+  }
+if (message.channel.id == ayarlar.BOTLog && message.author.id !== client.user.id) return message.delete()
+})
+// [ ----------------------------------------------] \\
+// [ ----------------------------------------------] \\
+// [ ----------------------------------------------] \\
 client.on('guildMemberAdd',async member => {
 if (member.user.bot && db.has(`Ekledi_${member.id}`)) {
 const BOTEkleyen = await db.fetch(`Ekledi_${member.id}`)
@@ -94,14 +116,12 @@ member.roles.add('761883878373589012') // Üye Rol ID
 }
 })
 // [ ----------------------------------------------] \\
+// [ ----------------------------------------------] \\
+// [ ----------------------------------------------] \\
 client.on('ready',async () => {
 client.user.setActivity('Eklenen Botları',{ type: 'WATCHING'})
 client.channels.cache.get(ayarlar.SesKanalı).join()
-})
-// [ ----------------------------------------------] \\
-// [ ----------------------------------------------] \\
-client.on('message',async message => {
-if (message.channel.id == '761883915131813888') return message.delete()
+console.log(`${client.user.username} Aktif!`)
 })
 // [ ----------------------------------------------] \\
 // [ ----------------------------------------------] \\
@@ -121,10 +141,10 @@ db.delete(`BOT_${member.id}`)
 // [ ----------------------------------------------] \\
 client.on('voiceStateUpdate', async (Code, Pepe) => {
 if (Pepe.member.user.bot && Pepe.channelID && Pepe.member.user.id == client.user.id && !Pepe.selfDeaf) {
-Pepe.setSelfDeaf(true)
+Pepe.setSelfDeaf(false)
 }
 if (Pepe.member.user.bot && Pepe.channelID && Pepe.member.user.id == client.user.id && !Pepe.selfMute) {
-Pepe.setSelfMute(true)
+Pepe.setSelfMute(false)
 }
 })
 // [ ----------------------------------------------] \\
@@ -143,7 +163,7 @@ client.on('messageDelete',async message => {
         .setDescription(`❓ **| Reddetme sebebi yazınız.**`)
         client.channels.cache.get(message.channel.id).send(Ceon).then(Message => {
 	     	Message.delete({timeout:15000})
-            client.guilds.cache.get(message.guild.id).channels.cache.get(message.channel.id).awaitMessages(Message => ['675593025468235806','334063167606882305','749665141980659762','322756173654786050','','','','',''].includes(Message.author.id), {max: 1,time: 15000,errors: ['time']
+            client.guilds.cache.get(message.guild.id).channels.cache.get(message.channel.id).awaitMessages(Message => Message.member.roles.cache.find(Rol => Rol.id === ''), {max: 1,time: 15000,errors: ['time']
             }).then(async Collected => {
             let Cevap;
             const Cevap1 = Collected.first().content
@@ -168,4 +188,4 @@ client.elevation = message => {
     return permlvl
 }
 
-client.login(process.env.token)
+client.login(process.env.token).catch(() => console.error('(node:8295) UnhandledPromiseRejectionWarning: Hata [GEÇERSİZ_TOKEN]: Geçersiz token tespit edildi.'))
