@@ -94,8 +94,11 @@ if (message.content == `${ayarlar.prefix}hazır` && message.author.id == message
 > 
 > **BOT Eklemek İçin\`;\`**
 > 
-> \`${ayarlar.prefix}bot-ekle ${client.user.id}\`
-`)
+> \`${ayarlar.prefix}bot-ekle ${client.user.id}   ${ayarlar.prefix}   Hayır\`
+>  ${ayarlar.prefix}bot-ekle        <ClientID>            <Prefix> <DBL>
+> 
+> Otomatik Sistem Vardır Çıkanın Botu Otomatik Olarak Atılacaktır.
+`).then(EreNn => EreNn.react('✅'))
 })
 // [ ----------------------------------------------] \\
 // [ ----------------------------------------------] \\
