@@ -88,7 +88,14 @@ client.on('message',async message => {
     if (perms < cmd.conf.permLevel) return
     cmd.run(client, message, params, perms)
   }
-if (message.channel.id == ayarlar.BOTLog && message.author.id !== client.user.id) return message.delete()
+if (message.channel.id == ayarlar.BOTEkletme && message.author.id !== client.user.id) return message.delete()
+if (message.content == `${ayarlar.prefix}hazır` && message.author.id == message.guild.ownerID) return client.channels.cache.get(ayarlar.BOTEkletme).send(`
+> Merhaba, \`${message.guild.name}\` kullanıcıları;
+> 
+> **BOT Eklemek İçin\`;\`**
+> 
+> \`${ayarlar.prefix}bot-ekle ${client.user.id}\`
+`)
 })
 // [ ----------------------------------------------] \\
 // [ ----------------------------------------------] \\

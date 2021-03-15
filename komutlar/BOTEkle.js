@@ -7,17 +7,19 @@ moment.locale('tr')
 exports.run = async (client, message, args) => {
 if (message.channel.id !== ayarlar.BOTEkletmeKanalı) return message.channel.send('Bu Komut Sadece <#'+ayarlar.BOTEkletmeKanalı+'> Kanalında Kullanılabilir!').then(Message => Message.delete({timeout: 7500}))
 const ClientID = args[0]
-if (!ClientID || isNaN(ClientID)) return message.channel.send('**Lütfen BOT ID Yazınız**').then(Message => Message.delete({timeout: 7500})),message.delete()
+if (!ClientID || isNaN(ClientID)) return message.channel.send('**Lütfen BOT ID Yazınız**').then(Message => Message.delete({timeout: 7500}))
 const Prefix = args[1]
-if (!Prefix) return message.channel.send('**Lütfen Prefix Yazınız**').then(Message => Message.delete({timeout: 7500})),message.delete()
+if (!Prefix) return message.channel.send('**Lütfen Prefix Yazınız**').then(Message => Message.delete({timeout: 7500}))
 const DBL = args[2]
-if (!DBL) return message.channel.send('**Lütfen DBL Durumunu Yazınız**').then(Message => Message.delete({timeout: 7500})),message.delete()
+if (!DBL) return message.channel.send('**Lütfen DBL Durumunu Yazınız**').then(Message => Message.delete({timeout: 7500}))
 const BOTModeratör = ayarlar.BOTModRol
 message.delete()
-if (ClientID.length < 18) return message.channel.send('**Girdiğiniz ID Hiçbir Hesap İle Eşleşmedi (Eksik Yazmış Olabilirsiniz.).**').then(Message => Message.delete({timeout: 7500})),message.delete()
-if (message.guild.members.cache.find(Botlar => Botlar.id === ClientID) && db.has(`Sahip_${ClientID}`) && db.has(`Eklenme_${ClientID}`)) return message.channel.send('**Bu BOT Zaten Ekli!** (Tarafından: `'+client.users.cache.get(db.fetch(`Sahip_${ClientID}`)).tag+' | '+db.fetch(`Eklenme_${ClientID}`)+'`)').then(Message => Message.delete({timeout: 7500})),message.delete()
+if (ClientID.length < 18) return message.channel.send('**Girdiğiniz ID Hiçbir Hesap İle Eşleşmedi (Eksik Yazmış Olabilirsiniz.).**').then(Message => Message.delete({timeout: 7500}))
+if (message.guild.members.cache.find(Botlar => Botlar.id === ClientID) && db.has(`Sahip_${ClientID}`) && db.has(`Eklenme_${ClientID}`)) return message.channel.send('**Bu BOT Zaten Ekli!** (Tarafından: `'+client.users.cache.get(db.fetch(`Sahip_${ClientID}`)).tag+' | '+db.fetch(`Eklenme_${ClientID}`)+'`)').then(Message => Message.delete({timeout: 7500}))
 client.users.fetch(ClientID).then((User) => {
-if (!User.bot) return message.channel.send('**Girdiğiniz ID Bir Bota Ait Değil.**').then(Message => Message.delete({timeout: 7500})),message.delete()
+if (!User.bot) return message.channel.send('**Girdiğiniz ID Bir Bota Ait Değil.**').then(Message => Message.delete({timeout: 7500}))
+let RevengeNYKS;
+if (DBL.toLowerCase() == 'evet') RevengeNYKS = ''
 const Revenge = new Discord.MessageEmbed()
 .setColor('BLUE')
 .setAuthor(message.author.tag,message.author.avatarURL({dynamic:true}))

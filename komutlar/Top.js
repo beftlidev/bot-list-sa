@@ -8,12 +8,12 @@ const Sıralama = db.all().filter(data => data.ID.startsWith(`Count_`)).sort((a,
 Sıralama.length = 10
 let SonuçDB = ""
 for (var i in Sıralama) {
-SonuçDB += `**${Sıralama.indexOf(Sıralama[i])+1}. ${client.users.cache.get(Sıralama[i].ID.slice(6)).username}** - **${Sıralama[i].data}**\n`
+SonuçDB += `**${Sıralama.indexOf(Sıralama[i])+1}. ${client.users.cache.get(Sıralama[i].ID.slice(6)).username}** - **${Sıralama[i].data}** Ekleme.\n`
 }
 const PepeCode = new Discord.MessageEmbed()
 .setColor('#12ae87')
 .setAuthor('Leaderboard')
-.setDescription(`**${moment(message.guild.members.cache.get(client.user.id).joinedAt, "DD").fromNow()}den** beri veriler kaydedildi
+.setDescription(`**${moment(message.guild.members.cache.get(client.user.id).joinedAt, 'DD').fromNow()}den** beri veriler kaydedildi
 (Son güncelleme **bir kaç sanyiye önce**, gelecek güncelleme **gün içerisinde**)
 
 ${SonuçDB ? SonuçDB:'Veri Yok.'}`)
