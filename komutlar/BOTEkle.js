@@ -12,10 +12,11 @@ const Prefix = args[1]
 if (!Prefix) return message.channel.send('**Lütfen Prefix Yazınız**').then(Message => Message.delete({timeout: 7500}))
 const DBL = args[2]
 if (!DBL) return message.channel.send('**Lütfen DBL Durumunu Yazınız**').then(Message => Message.delete({timeout: 7500}))
-if (db.fetch(`Durum_${ClientID}`) == true) return message.channel.send('**Botunuzun Hali Hazırda **')
-const BOTModeratör = ayarlar.BOTModRol
 if (ClientID.length < 18) return message.channel.send('**Girdiğiniz ID Hiçbir Hesap İle Eşleşmedi (Eksik Yazmış Olabilirsiniz.).**').then(Message => Message.delete({timeout: 7500}))
-if (message.guild.members.cache.find(Botlar => Botlar.id === ClientID) && db.has(`Sahip_${ClientID}`) && db.has(`Eklenme_${ClientID}`)) return message.channel.send('**Bu BOT Zaten Ekli!** (Tarafından: `'+client.users.cache.get(db.fetch(`Sahip_${ClientID}`)).tag+' | '+db.fetch(`Eklenme_${ClientID}`)+'`)').then(Message => Message.delete({timeout: 7500}))
+if (db.fetch(`Durum_${ClientID}`) == true) return message.channel.send('**Botunuzun Hali Hazırda Mevcut Bir Başvurusu Bulunuyor. Lütfen Bekleyin ya da Bir Yetkili İle İletişime Geçin.**').then(Message => Message.delete({timeout: 7500}))
+if (message.guild.members.cache.filter(Users => Users.user.bot).find(Botlar => Botlar.id === ClientID) && db.has(`Sahip_${ClientID}`) && db.has(`Eklenme_${ClientID}`)) return message.channel.send('**Bu BOT Zaten Ekli!** (Tarafından: `'+client.users.cache.get(db.fetch(`Sahip_${ClientID}`)).tag+' | '+db.fetch(`Eklenme_${ClientID}`)+'`)').then(Message => Message.delete({timeout: 7500}))
+const BOTModeratör = ayarlar.BOTModRol
+db.set(`Durum_${ClientID}`,true)
 client.users.fetch(ClientID).then((User) => {
 if (!User.bot) return message.channel.send('**Girdiğiniz ID Bir Bota Ait Değil.**').then(Message => Message.delete({timeout: 7500}))
 let RevengeNYKS;

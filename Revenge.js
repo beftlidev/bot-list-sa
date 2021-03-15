@@ -120,6 +120,7 @@ const Embed = new Discord.MessageEmbed()
 client.users.cache.get(BOTEkleyen).send(`<@${BOTEkleyen}>`,Embed)
 client.channels.cache.get(ayarlar.BOTLog).send(`**<@${BOTEkleyen}> Adlı Kullanıcının \`${client.users.cache.get(member.id).tag}\` Adlı Sistemde Onay Bekleyen Botu \`${client.users.cache.get(Log.executor.id).tag} [${db.fetch(`Count_${Log.executor.id}`) || 1}]\` Tarafından Kabul Edildi.**`)
 db.add(`Count_${Log.executor.id}`,1)
+db.delete(`Durum_${member.id}`)
 member.roles.add('820331331753607269') // BOT Rol ID
 } else {
 member.roles.add('820331082406560775') // Üye Rol ID
@@ -166,6 +167,7 @@ client.on('messageDelete',async message => {
     const fetchedLogs = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(Audit => Audit.entries.first())
     if (fetchedLogs.executor.id === client.user.id || !client.guilds.cache.get(message.guild.id).members.cache.get(fetchedLogs.executor.id).roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol)) return
     const Clientt = Bilgi.Client
+    db.delete(`Durum_${Bilgi.Client}`)
     client.users.fetch(Clientt).then((Client) => {
         const Ceon = new Discord.MessageEmbed()
         .setColor('BLUE')
@@ -178,6 +180,8 @@ client.on('messageDelete',async message => {
             client.guilds.cache.get(message.guild.id).channels.cache.get(message.channel.id).awaitMessages(Message => Message.member.roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol), {max: 1,time: 15000,errors: ['time']
             }).then(async Collected => {
             client.channels.cache.get(message.channel.id).bulkDelete(2)
+            client.users.cache.get(Bilgi.Gönderen).send(`Merhaba <@${Bilgi.Gönderen}>,
+**\`${message.guild.name}\` Sunucusunda Sırada Bekleyen \`${Client.tag}\` Adındaki Botunuz \`${Collected.first().author.tag}\` Tarafından \`${Collected.first().content || 'Belirtilmedi'}\` Sebebiyle Reddedildi.**`)
             client.channels.cache.get(ayarlar.BOTLog).send(`**<@${Bilgi.Gönderen}> Adlı Kullanıcının \`${Client.tag}\` Adlı Sistemde Onay Bekleyen Botu \`${Collected.first().author.tag}\` Tarafından \`${Collected.first().content || 'Belirtilmedi'}\` Sebebiyle Reddedildi.**`)
             })
             })
