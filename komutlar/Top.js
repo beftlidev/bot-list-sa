@@ -6,7 +6,7 @@ require('moment-duration-format')
 exports.run = async (client, message, args) => {
 const Sıralama = db.all().filter(data => data.ID.startsWith(`Count_`)).sort((a,b) => b.data - a.data)
 Sıralama.length = 10
-let SonuçDB = ""
+let SonuçDB = ''
 for (var i in Sıralama) {
 SonuçDB += `**${Sıralama.indexOf(Sıralama[i])+1}. ${client.users.cache.get(Sıralama[i].ID.slice(6)).username}** - **${Sıralama[i].data}** Ekleme.\n`
 }

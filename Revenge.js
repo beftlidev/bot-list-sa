@@ -131,7 +131,8 @@ member.roles.add('820331082406560775') // Üye Rol ID
 // [ ----------------------------------------------] \\
 client.on('ready',async () => {
 client.user.setActivity('Eklenen Botları',{ type: 'WATCHING'})
-client.channels.cache.get(ayarlar.SesKanalı).join()
+const Ses = client.channels.cache.get(ayarlar.SesKanalı)
+if (Ses) Ses.join()
 console.log(`${client.user.username} Aktif!`)
 })
 // [ ----------------------------------------------] \\
