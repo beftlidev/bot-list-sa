@@ -13,15 +13,12 @@ if (!Prefix) return message.channel.send('**Lütfen Prefix Yazınız**').then(Me
 const DBL = args[2]
 if (!DBL) return message.channel.send('**Lütfen DBL Durumunu Yazınız**').then(Message => Message.delete({timeout: 7500}))
 if (ClientID.length < 18) return message.channel.send('**Girdiğiniz ID Hiçbir Hesap İle Eşleşmedi (Eksik Yazmış Olabilirsiniz.).**').then(Message => Message.delete({timeout: 7500}))
-//if (db.fetch(`Durum_${ClientID}`) == true) return message.channel.send('**Botunuzun Hali Hazırda Mevcut Bir Başvurusu Bulunuyor. Lütfen Bekleyin ya da Bir Yetkili İle İletişime Geçin.**').then(Message => Message.delete({timeout: 7500}))
+if (db.fetch(`Durum_${ClientID}`) == true) return message.channel.send('**Botunuzun Hali Hazırda Mevcut Bir Başvurusu Bulunuyor. Lütfen Bekleyin ya da Bir Yetkili İle İletişime Geçin.**').then(Message => Message.delete({timeout: 7500}))
 if (message.guild.members.cache.filter(Users => Users.user.bot).find(Botlar => Botlar.id === ClientID) && db.has(`Sahip_${ClientID}`) && db.has(`Eklenme_${ClientID}`)) return message.channel.send('**Bu BOT Zaten Ekli!** (Tarafından: `'+client.users.cache.get(db.fetch(`Sahip_${ClientID}`)).tag+' | '+db.fetch(`Eklenme_${ClientID}`)+'`)').then(Message => Message.delete({timeout: 7500}))
 const BOTModeratör = ayarlar.BOTModRol
 db.set(`Durum_${ClientID}`,true)
 client.users.fetch(ClientID).then((User) => {
 if (!User.bot) return message.channel.send('**Girdiğiniz ID Bir Bota Ait Değil.**').then(Message => Message.delete({timeout: 7500}))
-let RevengeNYKS = ''
-if (DBL.toLowerCase() === 'evet' || 'onaylı' || 'yes') RevengeNYKS = `[Evet](https://top.gg/bot/${ClientID})`
-if (DBL.toLowerCase() === 'hayır' || 'yok' || 'no' || 'onaysız') RevengeNYKS = 'Hayır'
 const Revenge = new Discord.MessageEmbed()
 .setColor('BLUE')
 .setAuthor(message.author.tag,message.author.avatarURL({dynamic:true}))
@@ -32,7 +29,7 @@ Client ID: **\`${ClientID}\`**
 Client Name: **\`${User.tag}\`**
 Prefix: **\`${Prefix}\`**
 Sahip: **\`${message.author.tag}\`** (${message.author})
-DBL Onay: **${RevengeNYKS}**
+DBL Onay: **[${DBL}](https://top.gg/bot/${ClientID})**
 
 [BOT Davet!](https://discord.com/oauth2/authorize?client_id=${ClientID}&scope=bot&permissions=0)`)
 .setTimestamp()
