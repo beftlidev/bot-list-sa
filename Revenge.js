@@ -88,8 +88,8 @@ client.on('message',async message => {
     if (perms < cmd.conf.permLevel) return
     cmd.run(client, message, params, perms)
   }
-if (message.channel.id == ayarlar.BOTEkletme && message.author.id !== client.user.id) return message.delete()
-if (message.content == `${ayarlar.prefix}hazır` && message.author.id == message.guild.ownerID) return client.channels.cache.get(ayarlar.BOTEkletme).send(`
+if (message.channel.id == ayarlar.BOTEkletmeKanalı && message.author.id !== client.user.id) return message.delete()
+if (message.content == `${ayarlar.prefix}hazır` && message.author.id == message.guild.ownerID) return client.channels.cache.get(ayarlar.BOTEkletmeKanalı).send(`
 > Merhaba, \`${message.guild.name}\` kullanıcıları;
 > 
 > **BOT Eklemek İçin\`;\`**
@@ -153,10 +153,10 @@ db.delete(`BOT_${member.id}`)
 // [ ----------------------------------------------] \\
 client.on('voiceStateUpdate', async (Code, Pepe) => {
 if (Pepe.member.user.bot && Pepe.channelID && Pepe.member.user.id == client.user.id && !Pepe.selfDeaf) {
-Pepe.setSelfDeaf(false)
+Pepe.setSelfDeaf(true)
 }
 if (Pepe.member.user.bot && Pepe.channelID && Pepe.member.user.id == client.user.id && !Pepe.selfMute) {
-Pepe.setSelfMute(false)
+Pepe.setSelfMute(true)
 }
 })
 // [ ----------------------------------------------] \\
