@@ -7,7 +7,7 @@ moment.locale('tr')
 exports.run = async (client, message, args) => {
 if (message.channel.id !== ayarlar.BOTEkletmeKanalı) return message.channel.send('Bu Komut Sadece <#'+ayarlar.BOTEkletmeKanalı+'> Kanalında Kullanılabilir!').then(Message => Message.delete({timeout: 7500}))
 const ClientID = args[0]
-if (!ClientID || isNaN(ClientID)) return message.channel.send('**Lütfen BOT ID Yazınız**').then(Message => Message.delete({timeout: 7500}))
+if (!ClientID || isNaN(ClientID) || ClientID == client.user.id) return message.channel.send('**Lütfen BOT ID Yazınız**').then(Message => Message.delete({timeout: 7500}))
 const Prefix = args[1]
 if (!Prefix) return message.channel.send('**Lütfen Prefix Yazınız**').then(Message => Message.delete({timeout: 7500}))
 const DBL = args[2]

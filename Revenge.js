@@ -124,7 +124,7 @@ client.users.cache.get(BOTEkleyen).send(`<@${BOTEkleyen}>`,Embed)
 client.channels.cache.get(ayarlar.BOTLog).send(`**<@${BOTEkleyen}> Adlı Kullanıcının \`${client.users.cache.get(member.id).tag}\` Adlı Sistemde Onay Bekleyen Botu \`${client.users.cache.get(Log.executor.id).tag} [${db.fetch(`Count_${Log.executor.id}`) || 1}]\` Tarafından Kabul Edildi.**`)
 db.add(`Count_${Log.executor.id}`,1)
 db.delete(`Durum_${member.id}`)
-member.roles.add('820331331753607269') // BOT Rol ID
+member.roles.add(ayarlar.BOTRol) // BOT Rol ID
 } else {
 member.roles.add('820331082406560775') // Üye Rol ID
 }
