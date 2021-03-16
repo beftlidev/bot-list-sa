@@ -88,7 +88,6 @@ client.on('message',async message => {
     if (perms < cmd.conf.permLevel) return
     cmd.run(client, message, params, perms)
   }
-if (message.channel.id == ayarlar.BOTEkletmeKanalı && message.author.id !== client.user.id) return message.delete()
 if (message.content == `${ayarlar.prefix}hazır` && message.author.id == message.guild.ownerID) return client.channels.cache.get(ayarlar.BOTEkletmeKanalı).send(`
 > Merhaba, \`${message.guild.name}\` kullanıcıları;
 > 
@@ -99,6 +98,10 @@ if (message.content == `${ayarlar.prefix}hazır` && message.author.id == message
 > 
 > Otomatik Sistem Vardır Çıkanın Botu Otomatik Olarak Atılacaktır.
 `).then(EreNn => EreNn.react('✅'))
+})
+
+client.on('message',async message => {
+if (message.channel.id == ayarlar.BOTEkletmeKanalı && message.author.id !== client.user.id) message.delete()
 })
 // [ ----------------------------------------------] \\
 // [ ----------------------------------------------] \\
