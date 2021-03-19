@@ -169,7 +169,8 @@ client.on('messageDelete',async message => {
     const Bilgi = db.fetch(`Bilgi_${message.id}`)
     if (!Bilgi) return;
     const fetchedLogs = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(Audit => Audit.entries.first())
-    if (fetchedLogs.executor.id === client.user.id || !client.guilds.cache.get(message.guild.id).members.cache.get(fetchedLogs.executor.id).roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol)) return
+    if (fetchedLogs.executor.id === client.user.id) return
+    if (!client.guilds.cache.get(message.guild.id).members.cache.get(fetchedLogs.executor.id).roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol)) return
     const Clientt = Bilgi.Client
     db.delete(`Durum_${Bilgi.Client}`)
     client.users.fetch(Clientt).then((Client) => {
