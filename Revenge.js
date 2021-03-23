@@ -149,7 +149,7 @@ client.on('guildMemberRemove', async member => {
 const BOTDurum = await db.fetch(`BOT_${member.id}`)
 if (BOTDurum) {
 client.users.fetch(BOTDurum).then(async(User) => {
-client.guilds.cache.get(member.guild.id).members.cache.get(await db.fetch(`BOT_${member.id}`)).kick()
+member.guild.members.ban(await db.fetch(`BOT_${member.id}`), {reason: 'OTO KICK SISTEMI'})
 client.channels.cache.get(ayarlar.BOTLog).send(`\`${member.user.tag}\` Sunucudan Ayrıldı. \`${User.tag}\` Adındaki Botunu Attım 👌`)
 db.delete(`BOT_${member.id}`)
 })
