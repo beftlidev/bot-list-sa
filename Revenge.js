@@ -109,10 +109,10 @@ if (message.channel.id == ayarlar.BOTEkletmeKanalı && message.author.id !== cli
 client.on('guildMemberAdd',async member => {
 if (member.user.bot && db.has(`Ekledi_${member.id}`)) {
 const BOTEkleyen = await db.fetch(`Ekledi_${member.id}`)
-client.channels.cache.get(ayarlar.BOTModKanal).messages.fetch({around: db.fetch(`Mesaj_${member.id}`), limit:1}).then(async REmbed => {
-const Embed = REmbed.first().edit(new Discord.MessageEmbed().setColor('GREEN'))
-})
 const Log = await member.guild.fetchAuditLogs({type: 'BOT_ADD'}).then(Audit => Audit.entries.first())
+client.channels.cache.get(ayarlar.BOTModKanal).messages.fetch({around: db.fetch(`Mesaj_${member.id}`), limit:1}).then(async REmbed => {
+REmbed.first().edit(new Discord.MessageEmbed().setColor('GREEN').setDescription(`Bu bot \`${client.users.cache.get(Log.executor.id).tag}\` tarafından kabul edildi.`))
+})
 client.guilds.cache.get(member.guild.id).members.cache.get(BOTEkleyen).roles.add(ayarlar.GeliştiriciRolü)
 const Embed = new Discord.MessageEmbed()
 .setColor('BLUE')
