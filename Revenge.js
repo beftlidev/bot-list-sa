@@ -9,10 +9,7 @@ const db = require('quick.db')
 const moment = require('moment')
 require('moment-duration-format')
 moment.locale('tr')
-app.get("/", (request, response) => {
-response.sendStatus(200)
-})
-app.listen(process.env.PORT)
+
 const Peppe = message => {
   console.log(`${message}`)
 }
