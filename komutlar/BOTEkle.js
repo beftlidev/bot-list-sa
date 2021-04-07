@@ -31,7 +31,7 @@ Prefix: **\`${Prefix}\`**
 Sahip: **\`${message.author.tag}\`** (${message.author})
 DBL Onay: **[${DBL}](https://top.gg/bot/${ClientID})**
 
-[BOT Davet!](https://discord.com/oauth2/authorize?client_id=${ClientID}&scope=bot&permissions=0)`)
+[BOT Davet!](https://discord.com/oauth2/authorize?scope=bot&permissions=0&client_id=${ClientID}&guild_id=${message.guild.id})`)
 .setTimestamp()
 .setFooter(User.tag,User.avatarURL())
 client.channels.cache.get(ayarlar.BOTLog).send(`**${message.author} Adlı Kullanıcı \`${User.tag}\` Adlı Botunu Sisteme Onaylanması İçin Başvurdu.**`)
