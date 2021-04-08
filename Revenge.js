@@ -187,7 +187,7 @@ client.on('messageDelete',async message => {
         .setDescription(`❓ **| Reddetme sebebi yazınız.**`)
         client.channels.cache.get(message.channel.id).send(Ceon).then(Message => {
 	     	Message.delete({timeout:15000})
-            client.guilds.cache.get(message.guild.id).channels.cache.get(message.channel.id).awaitMessages(Message => Message.member.roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol), {max: 1,time: 15000,errors: ['time']
+            client.guilds.cache.get(message.guild.id).channels.cache.get(message.channel.id).awaitMessages(Message => Message.member.roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol) && Message.author.id === fetchedLogs.executor.id, {max: 1,time: 15000,errors: ['time']
             }).then(async Collected => {
             client.channels.cache.get(message.channel.id).bulkDelete(2)
             client.users.cache.get(Bilgi.Gönderen).send(`Merhaba <@${Bilgi.Gönderen}>,
