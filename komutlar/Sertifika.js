@@ -1,10 +1,9 @@
 const Discord = require('discord.js')
-const db = require('quick.db')
+const db = require('croxydb')
 const ayarlar = require('../ayarlar.json')
 exports.run = async (client, message, args) => {
 const Embed = new Discord.MessageEmbed()
 .setColor('BLUE')
-.setTitle('⚠ Hata!')
 .setDescription('Bu komutu kullanabilmek için `'+message.guild.roles.cache.find(Roller => Roller.id === ayarlar.BOTModRol).name+'` rolüne sahip olman gerekli.')
 if (!message.member.roles.cache.find(Rol => Rol.id === ayarlar.BOTModRol)) return message.channel.send(Embed).then(Message => Message.delete({timeout: 7500}))
 const Üye = message.mentions.members.first()
