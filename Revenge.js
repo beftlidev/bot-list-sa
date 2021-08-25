@@ -5,7 +5,7 @@ const http = require('http')
 const express = require('express')
 const ayarlar = require('./ayarlar.json')
 const app = express()
-const db = require('quick.db')
+const db = require('croxydb')
 const moment = require('moment')
 require('moment-duration-format')
 moment.locale('tr')
@@ -121,7 +121,6 @@ REmbed.first().delete()
 client.guilds.cache.get(member.guild.id).members.cache.get(BOTEkleyen).roles.add(ayarlar.GeliştiriciRolü)
 const Embed = new Discord.MessageEmbed()
 .setColor('BLUE')
-.setTitle('🎉 Müjde!')
 .setDescription(`🎉 Tebrikler! \`${member.guild.name}\` Adlı Sunucuda Sırada Olan \`${client.users.cache.get(member.id).tag}\` Adlı Botunuz \`${client.users.cache.get(Log.executor.id).tag}\` Tarafından Onaylandı! (Sunucudan Çıkarsan Atılacaktır.)`)
 .setThumbnail(member.user.avatarURL())
 .setFooter(member.guild.name+'・'+member.guild.memberCount,member.guild.iconURL({dynamic:true}))
@@ -131,7 +130,7 @@ db.add(`Count_${Log.executor.id}`,1)
 db.delete(`Durum_${member.id}`)
 member.roles.add(ayarlar.BOTRol) // BOT Rol ID
 } else {
-member.roles.add('820331082406560775') // Üye Rol ID
+member.roles.add('781799135338430474') // Üye Rol ID
 }
 })
 // [ ----------------------------------------------] \\
@@ -209,4 +208,4 @@ client.elevation = message => {
     return permlvl
 }
 
-client.login(process.env.token).catch(() => console.error('(node:8295) UnhandledPromiseRejectionWarning: Hata [GEÇERSİZ_TOKEN]: Geçersiz token tespit edildi.'))
+client.login("").catch(() => console.error('(node:8295) UnhandledPromiseRejectionWarning: Hata [GEÇERSİZ_TOKEN]: Geçersiz token tespit edildi.'))
