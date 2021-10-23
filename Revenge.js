@@ -130,7 +130,7 @@ db.add(`Count_${Log.executor.id}`,1)
 db.delete(`Durum_${member.id}`)
 member.roles.add(ayarlar.BOTRol) // BOT Rol ID
 } else {
-member.roles.add('781799135338430474') // Üye Rol ID
+member.roles.add('901409434729865287') // Üye Rol ID
 }
 })
 // [ ----------------------------------------------] \\
